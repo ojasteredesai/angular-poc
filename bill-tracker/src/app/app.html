@@ -14,10 +14,10 @@
     <main>
       <nav>
         <h3>Navigation</h3>
-        <a routerLink="/home">Dashboard</a>
-        <a routerLink="/timesheet">Timesheet</a>
-        <a routerLink="/expenses">Expenses</a>
-        <a routerLink="/invoice">Invoice</a>
+        <a [routerLink]="['']">Dashboard</a>
+        <a [routerLink]="['timesheet']">Timesheet</a>
+        <a [routerLink]="['expenses']">Expenses</a>
+        <a [routerLink]="['invoice']">Invoice</a>
       </nav>
 
       <section>
@@ -26,7 +26,7 @@
     </main>
 
     <footer>
-      <h1>Header</h1>
+      <h1>Footer</h1>
     </footer>
   </div>
 </body>

@@ -9,6 +9,6 @@ import { RouterOutlet, RouterLink } from '@angular/router';
   styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('bill-tracker');
+  protected readonly title = signal('Bill Tracker');
   
 }
