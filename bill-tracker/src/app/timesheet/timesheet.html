@@ -1,79 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Timesheet List</title>
-</head>
-<body>
-  <h1>Timesheet List</h1>
-  <table id="timesheetTable">
-    <thead>
-      <tr>
-        <th>Resource Name</th>
-        <th>Duration (hours)</th>
-        <th>Bill Rate ($/hr)</th>
-        <th>Total Payment ($)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Timesheet rows will appear here -->
-    </tbody>
-  </table>
+<h1>Timesheet List</h1>
+<table id="timesheetTable">
+  <thead>
+    <tr>
+      <th>Resource Name</th>
+      <th>Duration (hours)</th>
+      <th>Bill Rate ($/hr)</th>
+      <th>Total Payment ($)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ts of timesheets">
+      <td>{{ ts.resourceName }}</td>
+      <td>{{ ts.duration }}</td>
+      <td>{{ ts.billRate }}</td>
+      <td>{{ ts.totalPayment }}</td>
+    </tr>
+  </tbody>
+</table>
 
-  <h2>Create Timesheet</h2>
-  <form id="timesheetForm">
-    <label>Resource Name:
-      <input type="text" id="resourceName" required>
-    </label>
-    <label>Timesheet Duration (hours):
-      <input type="number" id="duration" required>
-    </label>
-    <label>Bill Rate ($/hr):
-      <input type="number" id="billRate" required>
-    </label>
-    <label>Total Payment ($):
-      <input type="number" id="totalPayment" readonly>
-    </label>
-    <button type="submit">Add Timesheet</button>
-  </form>
-
-  <script>
-    const form = document.getElementById('timesheetForm');
-    const tableBody = document.querySelector('#timesheetTable tbody');
-
-    const durationInput = document.getElementById('duration');
-    const billRateInput = document.getElementById('billRate');
-    const totalPaymentInput = document.getElementById('totalPayment');
-
-    // Auto-calculate total payment
-    function calculatePayment() {
-      const duration = parseFloat(durationInput.value) || 0;
-      const rate = parseFloat(billRateInput.value) || 0;
-      totalPaymentInput.value = (duration * rate).toFixed(2);
-    }
-
-    durationInput.addEventListener('input', calculatePayment);
-    billRateInput.addEventListener('input', calculatePayment);
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const resourceName = document.getElementById('resourceName').value;
-      const duration = durationInput.value;
-      const billRate = billRateInput.value;
-      const totalPayment = totalPaymentInput.value;
-
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${resourceName}</td>
-        <td>${duration}</td>
-        <td>${billRate}</td>
-        <td>${totalPayment}</td>
-      `;
-      tableBody.appendChild(row);
-
-      form.reset();
-      totalPaymentInput.value = '';
-    });
-  </script>
-</body>
-</html>
+<button routerLink="/timesheet-entry">Add Timesheet</button>

@@ -1,0 +1,37 @@
+<h1>Add Timesheet Entry</h1>
+<form #entryForm="ngForm" (ngSubmit)="save()">
+  <div>
+    <label>
+      Resource Name
+      <input name="resourceName" [(ngModel)]="entry.resourceName" required />
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Date
+      <input type="date" name="date" [(ngModel)]="entry.date" />
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Duration (hours)
+      <input type="number" name="duration" [(ngModel)]="entry.duration" min="0" required />
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Bill Rate ($/hr)
+      <input type="number" name="billRate" [(ngModel)]="entry.billRate" min="0" required />
+    </label>
+  </div>
+
+  <p>Total: {{ (entry.duration || 0) * (entry.billRate || 0) | number:'1.2-2' }}</p>
+
+  <div>
+    <button type="submit" [disabled]="entryForm.invalid">Save</button>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>
